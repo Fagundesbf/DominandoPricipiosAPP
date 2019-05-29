@@ -1,38 +1,85 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { NavController } from 'ionic-angular';
+import { RegisterPage } from '../register/register';
 
-@IonicPage()
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  login = true;
-  register = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  formularioLogin: FormGroup;
+
+  email: FormControl;
+  senha: FormControl;
+  errorEmail: boolean;
+  messageEmail: string;
+  errorsenha: boolean;
+  messagesenha: string;
+
+  // constructor(
+  //   private formBuilder: FormBuilder,
+  //   public navCtrl: NavController) {
+
+  //   let emailRegular = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
+
+  //   this.email = new FormControl("", Validators.compose([Validators.required, Validators.pattern(emailRegular)]))
+  //   this.senha = new FormControl("", Validators.compose([Validators.required, Validators.minLength(5)]));
+
+
+  //   this.formularioLogin = formBuilder.group({
+  //     email: this.email,
+  //     senha: this.senha
+  //   });
+
+  // }
+
+  constructor(
+    formBuilder: FormBuilder,
+    public navCtrl: NavController) {
+    let emailRegular = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    this.formularioLogin = formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegular)])],
+      senha: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(20), Validators.required])],
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  onSubmited() {
+
+    let { email, senha } = this.formularioLogin.controls;
+
+    if (!this.formularioLogin.valid) {
+      if (!email.valid) {
+        this.errorEmail = true;
+        this.messageEmail = "Ops! Email inválido";
+      } else {
+        this.messageEmail = "";
+      }
+
+      if (!senha.valid) {
+        this.errorsenha = true;
+        this.messagesenha = "A senha precisa ter de 6 a 20 caracteres"
+      } else {
+        this.messagesenha = "";
+      }
+    }
+    else {
+      alert("Login Realizado");
+      console.log(this.formularioLogin.value)
+    }
   }
 
-  exibirRegistrar() {
-    this.login = false;
-    this.register = true;
-  }
 
-  //Exibir form de login
-  exibirLogin() {
-    this.login = true;
-    this.register = false;
-  }
 
+
+  exibirRegistrar(): void {
+
+    this.navCtrl.push(RegisterPage);
+  }
 }
+
+

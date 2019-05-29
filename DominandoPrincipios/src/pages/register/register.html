@@ -1,0 +1,64 @@
+
+<ion-content >
+   <!-- REGISTRO -->
+   <div class="bg-register">
+<!-- OVERLAY -->
+<div class="overlay">
+  <!-- REGISTRO CONTAINER -->
+  <div>
+    <!-- LOGO -->
+    <div class="center padding-top-10-percent">
+      <img src="./assets/imgs/logo-white.png"
+           class="logo-white-login">
+    </div>
+
+    <!-- TEXTOS -->
+    <div class="mg-top-30">
+      <!-- TÍTULO -->
+      <h5 class="snow center bold no-margin">
+        Eba! Vamos lá.
+      </h5>
+      <!-- SUBTÍTULO -->
+      <p class="snow center light no-margin mg-top-5">
+        Crie suas credenciais de acesso
+      </p>
+    </div>
+
+    <!-- FORMS E CTA -->
+    <div class="padding-40">
+      <ion-item class="bg-transparent no-padding mg-top-30">
+        <ion-label stacked
+                   class="snow bold">Como você se chama?</ion-label>
+        <ion-input type="text"
+                   class="snow"></ion-input>
+      </ion-item>
+
+      <ion-item class="bg-transparent no-padding mg-top-20">
+        <ion-label stacked
+                   class="snow bold">Qual é o seu e-mail?</ion-label>
+        <ion-input type="email"
+                   class="snow"></ion-input>
+      </ion-item>
+
+      <ion-item class="bg-transparent no-padding mg-top-20">
+        <ion-label stacked
+                   class="snow bold">Escolha uma super senha :p</ion-label>
+        <ion-input type="password"
+                   class="snow"></ion-input>
+      </ion-item>
+
+      <div class="ctaRegister center bold mg-top-30" (click)="cadastrar()">
+        Cadastrar
+      </div>
+
+      <!-- JÁ TENHO UMA CONTA -->
+      <div class="txtRegistrar bold mg-top-20 center"
+           (click)="exibirLogin()">
+        Já tenho uma conta
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</ion-content>

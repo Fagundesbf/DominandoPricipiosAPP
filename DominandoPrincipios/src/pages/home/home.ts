@@ -8,11 +8,7 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
 
   constructor(public navCtrl: NavController) {
-    
-  }
-  onAbout(): void {
-    this.navCtrl.push('AboutPage');
-    console.log('fagundes');
+
   }
 
 }
