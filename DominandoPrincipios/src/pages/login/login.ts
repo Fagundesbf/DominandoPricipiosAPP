@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { NavController } from 'ionic-angular';
 import { RegisterPage } from '../register/register';
 
+import { LoadingProvider } from '../../providers/loading/loading';
+
 
 @Component({
   selector: 'page-login',
@@ -39,7 +41,8 @@ export class LoginPage {
 
   constructor(
     formBuilder: FormBuilder,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    public loadingCtrl:LoadingProvider) {
     let emailRegular = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     this.formularioLogin = formBuilder.group({
@@ -48,7 +51,8 @@ export class LoginPage {
     });
   }
 
-  onSubmited() {
+// LOGIN APLICAÇÃO...
+  onSubmited() { 
 
     let { email, senha } = this.formularioLogin.controls;
 
@@ -69,13 +73,16 @@ export class LoginPage {
     }
     else {
       alert("Login Realizado");
-      console.log(this.formularioLogin.value)
+      console.log(this.formularioLogin.value);
+          //chamaLoading
+          this.loadingCtrl.presentWithMessage('Carregando');
+          setTimeout(() => { 
+            this.loadingCtrl.dismiss().then(() => {}); 
+         }, 5000);								
     }
   }
 
-
-
-
+//IR PARA TELA DE REGISTRO...
   exibirRegistrar(): void {
 
     this.navCtrl.push(RegisterPage);
